@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI CHATBOT</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+      // Redirect to login if not logged in
+      if (!localStorage.getItem('isLoggedIn')) {
+        window.location.href = 'login.html';
+      }
+      // Logout function
+      function logout() {
+        localStorage.removeItem('isLoggedIn');
+        window.location.href = 'login.html';
+      }
+    </script>
+</head>
+<header class="chatbot-header">
+  <div class="header-left">
+      <img src="Pink_ribbon.svg.png" alt="Support Ribbon" class="ribbon-icon" />
+    <button class="login-btn" onclick="logout()">Logout</button>
+    <img src="https://cdn-icons-png.flaticon.com/512/1864/1864497.png" alt="AI Icon" class="ai-icon" />
+    <div class="header-texts">
+      <h1 class="chatbot-title">EMOHEAL</h1>
+      <p class="typing-text">Your healing buddy, always here💕</p>
+    </div>
+  </div>
+  <div class="header-right">
+    <select class="language-select">
+      <option value="en">🌐 English</option>
+      <option value="hi">🇮🇳 Hindi</option>
+      <option value="es">🇪🇸 Spanish</option>
+    </select>
+
+    
+    
+  </div>
+</header>
+<div id="playlist-toast" class="playlist-toast">🎵 Added to your playlist!</div>
+
+<body>
+      <section class="menu-section">
+          <a href="#meditation" class="header-link">🧘‍♀️ Meditation</a>
+          <a href="#exercise" class="header-link">🏋️‍♀️ Exercise</a>
+          <a href="#music" class="header-link">🎵 Music</a>
+          <a href="chatbot.html" class="header-link">🩷 Bestie</a>
+          <a href="#nurturezone" class="header-link">🌿 Nurture Zone</a>
+          <a href="#Healingcircle" class="header-link">🤝 Healing Circle</a>
+          <a href="#quickreach" class="header-link">🚨 Quick Reach</a>
+      </section>
+      <section class="quote-carousel">
+        <div class="carousel-image active">
+          <img src="q1.webp" alt="Image 1">
+          <div class="quote-text">"You are stronger than you think 💪"</div>
+        </div>
+        <div class="carousel-image">
+          <img src="q2.png" alt="Image 2">
+          <div class="quote-text">"Healing takes time, but it’s worth it 🌸"</div>
+        </div>
+        <div class="carousel-image">
+          <img src="q3.png" alt="Image 3">
+          <div class="quote-text">"Every scar tells a story of survival ✨"</div>
+        </div>
+        <div class="carousel-image">
+          <img src="q4.png" alt="Image 4">
+          <div class="quote-text">"Hope is the heartbeat of the soul 💗"</div>
+        </div>
+      </section>
+      
+    
+    <section class="music-section" id="music">
+        <div class="music-header">
+          <h2>🎶 Healing Tunes</h2>
+          <p>Relax and recharge with our soothing playlist.</p>
+        </div>
+      
+        <div class="music-container">
+          <div class="music-grid">
+            <!-- Track 1 -->
+            <div class="music-card">
+              <img src="q2.png" alt="Tranquil Mornings" class="track-img">
+              <div class="track-info">
+                <h4 class="track-title">Tranquil Mornings</h4>
+                <audio controls>
+                  <source src="audio1.mp3" type="audio/mpeg">
+                </audio>
+                <button class="add-to-playlist-btn">❤️ Add to Playlist</button>
+              </div>
+            </div>
+      
+            <!-- Track 2 -->
+            <div class="music-card">
+              <img src="q1.webp" alt="Gentle Rain" class="track-img">
+              <div class="track-info">
+                <h4 class="track-title">Gentle Rain</h4>
+                <audio controls>
+                  <source src="audio2.mp3" type="audio/mpeg">
+                </audio>
+                <button class="add-to-playlist-btn">❤️ Add to Playlist</button>
+              </div>
+            </div>
+      
+            <!-- Track 3 -->
+            <div class="music-card">
+              <img src="q4.png" alt="Healing Waves" class="track-img">
+              <div class="track-info">
+                <h4 class="track-title">Healing Waves</h4>
+                <audio controls>
+                  <source src="audio3.mp3" type="audio/mpeg">
+                </audio>
+                <button class="add-to-playlist-btn">❤️ Add to Playlist</button>
+              </div>
+            </div>
+      
+            <!-- Track 4 -->
+            <div class="music-card">
+              <img src="q3.png" alt="Morning Dew" class="track-img">
+              <div class="track-info">
+                <h4 class="track-title">Morning Dew</h4>
+                <audio controls>
+                  <source src="audio4.mp3" type="audio/mpeg">
+                </audio>
+                <button class="add-to-playlist-btn">❤️ Add to Playlist</button>
+              </div>
+            </div>
+      
+            <!-- Track 5 -->
+            <div class="music-card">
+              <img src="q2.png" alt="Serenity" class="track-img">
+              <div class="track-info">
+                <h4 class="track-title">Serenity</h4>
+                <audio controls>
+                  <source src="audio5.mp3" type="audio/mpeg">
+                </audio>
+                <button class="add-to-playlist-btn">❤️ Add to Playlist</button>
+              </div>
+            </div>
+      
+            <!-- Track 6 -->
+            <div class="music-card">
+              <img src="q1.webp" alt="Quiet Reflections" class="track-img">
+              <div class="track-info">
+                <h4 class="track-title">Quiet Reflections</h4>
+                <audio controls>
+                  <source src="audio6.mp3" type="audio/mpeg">
+                </audio>
+                <button class="add-to-playlist-btn">❤️ Add to Playlist</button>
+              </div>
+            </div>
+      
+            <!-- Track 7 -->
+            <div class="music-card">
+              <img src="q4.png" alt="Peaceful Mind" class="track-img">
+              <div class="track-info">
+                <h4 class="track-title">Peaceful Mind</h4>
+                <audio controls>
+                  <source src="audio7.mp3" type="audio/mpeg">
+                </audio>
+                <button class="add-to-playlist-btn">❤️ Add to Playlist</button>
+              </div>
+            </div>
+      
+            <!-- Track 8 -->
+            <div class="music-card">
+              <img src="q3.png" alt="Calm Ocean" class="track-img">
+              <div class="track-info">
+                <h4 class="track-title">Calm Ocean</h4>
+                <audio controls>
+                  <source src="audio8.mp3" type="audio/mpeg">
+                </audio>
+                <button class="add-to-playlist-btn">❤️ Add to Playlist</button>
+              </div>
+            </div>
+      
+            <!-- Track 9 -->
+            <div class="music-card">
+              <img src="q2.png" alt="Peaceful Path" class="track-img">
+              <div class="track-info">
+                <h4 class="track-title">Peaceful Path</h4>
+                <audio controls>
+                  <source src="audio9.mp3" type="audio/mpeg">
+                </audio>
+                <button class="add-to-playlist-btn">❤️ Add to Playlist</button>
+              </div>
+            </div>
+      
+            <!-- Track 10 -->
+            <div class="music-card">
+              <img src="q1.webp" alt="Dreamy Tunes" class="track-img">
+              <div class="track-info">
+                <h4 class="track-title">Dreamy Tunes</h4>
+                <audio controls>
+                  <source src="audio10.mp3" type="audio/mpeg">
+                </audio>
+                <button class="add-to-playlist-btn">❤️ Add to Playlist</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="exercise-section" id="exercise">
+        <div class="exercise-header">
+          <h2>🏃‍♀️ Healing Moves</h2>
+          <p>Gentle exercises to help you stay active and feel better every day.</p>
+        </div>
+      
+        <div class="exercise-container">
+          <div class="exercise-card">
+            <video class="exercise-video" controls>
+              <source src="exercise2.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <h4>Neck Stretch</h4>
+          </div>
+          <div class="exercise-card">
+            <video class="exercise-video" controls>
+              <source src="exercise3.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <h4>Arm Raise</h4>
+          </div>
+          <div class="exercise-card">
+            <video class="exercise-video" controls>
+              <source src="exercise1.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <h4>Shoulder Rolls</h4>
+          </div>
+          <div class="exercise-card">
+            <video class="exercise-video" controls>
+              <source src="exercise2.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <h4>Breathing Relaxation</h4>
+          </div>
+          <div class="exercise-card">
+            <video class="exercise-video" controls>
+              <source src="exercise3.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <h4>Breathing Relaxation</h4>
+          </div>
+          <div class="exercise-card">
+            <video class="exercise-video" controls>
+              <source src="exercise1.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+            <h4>Breathing Relaxation</h4>
+          </div>
+          
+        </div>
+      </section>
+      <section class="meditation-section" id="meditation">
+        <h2 class="meditation-title">🧘‍♀️ Meditation for Healing</h2>
+      
+        <div class="language-tabs">
+          <button id="englishBtn">English</button>
+          <button id="hindiBtn">हिंदी</button>
+        </div>
+      
+        <div id="english-meditation" class="meditation-videos">
+          <iframe width="250" height="140" src="https://www.youtube.com/embed/DcKoUlkq-tA?si=0hsfQ6kdPH12pbOp&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <iframe width="250" height="140" src="https://www.youtube.com/embed/FDzIAtMy5kY?si=j9zNSG0BMhO8RLR_&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <iframe width="250" height="140" src="https://www.youtube.com/embed/QqVXeks-4S8?si=eSNIi9JsxWUP2-ds&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <iframe width="250" height="140" src="https://www.youtube.com/embed/QG5_f-l1Kr0?si=KgqJgL8DmpGgGKm5&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <iframe width="250" height="140" src="https://www.youtube.com/embed/MNUXueouQjE?si=CRB7540DduWmoGn_&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      
+        <div id="hindi-meditation" class="meditation-videos" style="display: none;">
+          <iframe width="250" height="140" src="https://www.youtube.com/embed/-ygucOBbKJA?si=yE8756zBsqj1tMJS&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <iframe width="250" height="140" src="https://www.youtube.com/embed/-ygucOBbKJA?si=yE8756zBsqj1tMJS&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <iframe width="250" height="140" src="https://www.youtube.com/embed/oxqQ8WmnTLo?si=eMUfrv2ROscgCdZn&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <iframe width="250" height="140" src="https://www.youtube.com/embed/ZFe2B17HzRg?si=uOZV_8HMB1onQsm3&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          <iframe width="250" height="140" src="https://www.youtube.com/embed/ckPfgpRMy_c?si=orKtrw-3m5S1f6ev&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </section>
+      
+    <section class="Nurturezone" id="nurturezone">
+      <div class="awareness-container">
+        <h2 class="nurture-title">💖 With You, For You: <span class="ribbon">🎗️</span> Breast Cancer Awareness & Wellness</h2>
+        <div class="awareness-cards">
+          <div class="awareness-card">
+            <button class="accordion-header">🩺 What is Breast Cancer?</button>
+            <div class="accordion-body">
+              <p>Breast cancer is a type of cancer that begins in the cells of the breast. It can occur in both men and women, though it is far more common in women. The disease develops when cells in the breast grow uncontrollably, often forming a lump or mass. Early detection through regular screening is key to improving survival rates.</p>
+            </div>
+          </div>
+          <div class="awareness-card">
+            <button class="accordion-header">⚠️ Symptoms & Warning Signs</button>
+            <div class="accordion-body">
+              <ul>
+                <li>A lump in the breast or underarm that feels different from the surrounding tissue.</li>
+                <li>Change in the size, shape, or appearance of the breast.</li>
+                <li>Unexplained pain in the breast or nipple area.</li>
+                <li>Skin dimpling or redness of the breast.</li>
+                <li>Unusual discharge from the nipple (other than breast milk).</li>
+              </ul>
+            </div>
+          </div>
+          <div class="awareness-card">
+            <button class="accordion-header">🛡️ How to Prevent Breast Cancer?</button>
+            <div class="accordion-body">
+              <ul>
+                <li><strong>Regular Screenings:</strong> Mammograms and ultrasounds are essential for early detection. Women over 40 are recommended to get regular screenings.</li>
+                <li><strong>Healthy Diet:</strong> A well-balanced diet rich in fruits, vegetables, and whole grains can reduce cancer risk. Avoid excessive alcohol and maintain a healthy weight.</li>
+                <li><strong>Physical Activity:</strong> Staying active with regular exercise can improve overall health and reduce cancer risks.</li>
+                <li><strong>Genetic Testing:</strong> If you have a family history of breast cancer, genetic testing can help identify potential risks.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="awareness-card">
+            <button class="accordion-header">💬 Emotional Support & Coping</button>
+            <div class="accordion-body">
+              <ul>
+                <li><strong>Peer Support Groups:</strong> Connecting with others who are going through similar experiences can provide comfort and guidance.</li>
+                <li><strong>Counseling & Therapy:</strong> Professional therapy can help in dealing with the emotional burden of the disease.</li>
+                <li><strong>Mindfulness & Meditation:</strong> Practices such as yoga, meditation, and deep breathing can help manage stress and anxiety.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="awareness-card">
+            <button class="accordion-header">🌟 Inspiring Survivor Stories</button>
+            <div class="accordion-body">
+              <div class="story-card">
+                <h4>"Overcoming the Battle"</h4>
+                <p>Jane Doe, a survivor of breast cancer, shares her powerful journey of diagnosis, treatment, and recovery. From her initial fears to her ultimate victory, her story offers hope to those currently battling the disease.</p>
+                <a href="https://www.cancer.org/survivor-stories" target="_blank" class="link-to-stories">Read More Survivor Stories</a>
+              </div>
+            </div>
+          </div>
+          <div class="awareness-card">
+            <button class="accordion-header">📞 Emergency Helplines & Resources</button>
+            <div class="accordion-body">
+              <div class="helpline-card">
+                <ul>
+                  <li><strong>National Breast Cancer Helpline:</strong> 1-800-123-4567 (Available 24/7)</li>
+                  <li><strong>National Cancer Institute:</strong> 1-800-422-6237</li>
+                  <li><strong>Local Support Groups:</strong> Visit local support organizations in your area for counseling and peer support.</li>
+                </ul>
+                <a href="https://www.breastcancer.org" target="_blank" class="link-to-resources">Visit Breast Cancer Resources</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <script>
+        // Accordion functionality
+        document.querySelectorAll('.accordion-header').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const body = this.nextElementSibling;
+            if (body.style.maxHeight) {
+              body.style.maxHeight = null;
+              body.style.opacity = 0;
+            } else {
+              document.querySelectorAll('.accordion-body').forEach(b => {
+                b.style.maxHeight = null;
+                b.style.opacity = 0;
+              });
+              body.style.maxHeight = body.scrollHeight + 'px';
+              body.style.opacity = 1;
+            }
+          });
+        });
+      </script>
+    </section>
+   
+    <script src="script.js"></script>
+</body>
+</html>

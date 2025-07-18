@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EmoHeal Chatbot</title>
+  <style>
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background: linear-gradient(120deg, #fbc2eb 0%, #a6c1ee 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    .chatbot-card {
+      background: rgba(255,255,255,0.25);
+      backdrop-filter: blur(16px) saturate(120%);
+      border-radius: 24px;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+      border: 1.5px solid rgba(246, 7, 118, 0.15);
+      max-width: 850px;
+      min-width: 400px;
+      width: 90vw;
+      min-height: 600px;
+      padding: 0 0 32px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .chatbot-header {
+      width: 100%;
+      padding: 24px 0 12px 0;
+      text-align: center;
+      color: #f70776;
+      font-size: 2rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(247,7,118,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      margin-bottom: 4px;
+      border: 2px solid #fbc2eb;
+    }
+    .chat-area {
+      width: 94%;
+      min-height: 400px;
+      max-height: 500px;
+      overflow-y: auto;
+      margin: 0 auto 16px auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 18px 0;
+      /* Hide scrollbar for Webkit browsers */
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none;  /* IE and Edge */
+    }
+    .bubble {
+      padding: 14px 18px;
+      border-radius: 18px 18px 4px 18px;
+      background: #f70776;
+      color: #fff;
+      align-self: flex-end;
+      max-width: 80%;
+      font-size: 1rem;
+      box-shadow: 0 2px 8px rgba(247,7,118,0.08);
+      animation: fadeInUp 0.4s;
+    }
+    .bubble.ai {
+      background: #680747;
+      color: #fff7f7;
+      align-self: flex-start;
+      border-radius: 18px 18px 18px 4px;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    .input-row {
+      width: 90%;
+      display: flex;
+      gap: 8px;
+      margin: 0 auto;
+    }
+    .input-row input {
+      flex: 1;
+      padding: 12px 18px;
+      border-radius: 24px;
+      border: none;
+      font-size: 1rem;
+      background: #fff;
+      color: #680747;
+      outline: none;
+      box-shadow: 0 2px 8px rgba(31,38,135,0.08);
+      transition: box-shadow 0.2s;
+    }
+    .input-row input:focus {
+      box-shadow: 0 0 8px #f7077655;
+    }
+    .input-row button {
+      background: #f70776;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      font-size: 1.3rem;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .input-row button:hover {
+      background: #c3195d;
+      transform: scale(1.08);
+    }
+    .quick-replies {
+      display: flex;
+      gap: 8px;
+      margin: 8px 0 0 0;
+      flex-wrap: wrap;
+    }
+    .quick-reply-btn {
+      background: #fbc2eb;
+      color: #680747;
+      border: none;
+      border-radius: 16px;
+      padding: 7px 16px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      box-shadow: 0 1px 4px rgba(247,7,118,0.08);
+    }
+    .quick-reply-btn:hover {
+      background: #f70776;
+      color: #fff;
+    }
+    .hearts-bg {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .heart {
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      opacity: 0.7;
+      animation: drop-heart 9s linear infinite;
+      will-change: transform;
+    }
+    .heart svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    @keyframes drop-heart {
+      0% {
+        transform: translateY(-40px) translateX(0) scale(1) rotate(0deg);
+        opacity: 0.7;
+      }
+      80% {
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(100vh) translateX(var(--drift, 0px)) scale(0.8) rotate(30deg);
+        opacity: 0.1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hearts-bg" id="heartsBg"></div>
+  <div class="chatbot-card">
+    <div class="chatbot-header" id="personalHeader">
+      <div class="avatar">💗</div>
+      EmoHeal Buddy
+    </div>
+    <div id="personalGreeting" style="display:none; text-align:center; margin-bottom:10px;"></div>
+    <div class="chat-area" id="chatArea">
+      <!-- Chat bubbles will go here -->
+    </div>
+    <form class="input-row" id="chatForm" autocomplete="off" style="display:none;">
+      <input type="text" id="userInput" placeholder="Type your message..." required />
+      <button type="submit">➤</button>
+    </form>
+  </div>
+  <script>
+    const chatArea = document.getElementById('chatArea');
+    const chatForm = document.getElementById('chatForm');
+    const userInput = document.getElementById('userInput');
+    const quickReplies = document.getElementById('quickReplies');
+    const welcomeMsg = document.getElementById('welcomeMsg');
+    // Replace with your actual Gemini API key
+    const API_KEY = "AIzaSyArHNgT65ivTdYvrQfnj3k1tZVa9HYSPUQ";
+    const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
+
+    // Handle quick replies
+    if (quickReplies) {
+      quickReplies.addEventListener('click', function(e) {
+        if (e.target.classList.contains('quick-reply-btn')) {
+          const text = e.target.textContent;
+          addBubble(text, false);
+          welcomeMsg.querySelector('.quick-replies').remove();
+          sendToAI(text);
+        }
+      });
+    }
+
+    chatForm.onsubmit = async (e) => {
+      e.preventDefault();
+      const text = userInput.value.trim();
+      if (!text) return;
+      addBubble(text, false);
+      userInput.value = '';
+      sendToAI(text);
+    };
+
+    function addBubble(text, isAI, isLoading) {
+      const div = document.createElement('div');
+      div.className = 'bubble' + (isAI ? ' ai' : '');
+      div.innerHTML = isLoading ? '<span style="opacity:0.6;">Typing...</span>' : text;
+      chatArea.appendChild(div);
+      chatArea.scrollTop = chatArea.scrollHeight;
+    }
+
+    async function sendToAI(text) {
+      addBubble('...', true, true);
+      const loadingBubble = chatArea.lastElementChild;
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ contents: [{ parts: [{ text }] }] })
+        });
+        const data = await res.json();
+        loadingBubble.remove();
+        const aiText = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Sorry, I could not understand.';
+        addBubble(aiText, true);
+      } catch {
+        loadingBubble.remove();
+        addBubble('Sorry, there was an error. Please try again.', true);
+      }
+    }
+
+    // Improved heart rain animation
+    function randomBetween(a, b) { return a + Math.random() * (b - a); }
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      const left = randomBetween(0, 100);
+      const delay = randomBetween(0, 9);
+      const duration = randomBetween(7, 13); // slower fall
+      const size = randomBetween(22, 38);
+      const drift = randomBetween(-60, 60); // horizontal drift
+      heart.style.left = left + 'vw';
+      heart.style.animationDelay = delay + 's';
+      heart.style.animationDuration = duration + 's';
+      heart.style.width = size + 'px';
+      heart.style.height = size + 'px';
+      heart.style.setProperty('--drift', drift + 'px');
+      heart.innerHTML = `<svg viewBox="0 0 32 29" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M23.5 2C21.0147 2 18.7611 3.2375 17.5 5.14844C16.2389 3.2375 13.9853 2 11.5 2C7.35786 2 4 5.35786 4 9.5C4 18.5 16 27 16 27C16 27 28 18.5 28 9.5C28 5.35786 24.6421 2 20.5 2H23.5Z" fill="#f70776" stroke="#f70776" stroke-width="2"/></svg>`;
+      return heart;
+    }
+    const heartsBg = document.getElementById('heartsBg');
+    for (let i = 0; i < 36; i++) { // more hearts for a gentle rain
+      heartsBg.appendChild(createHeart());
+    }
+
+    // Personalized greeting and mood tracker
+    let userName = sessionStorage.getItem('emoheal_name') || '';
+    let userMood = sessionStorage.getItem('emoheal_mood') || '';
+    const personalGreeting = document.getElementById('personalGreeting');
+    const personalHeader = document.getElementById('personalHeader');
+
+    function askName() {
+      chatArea.innerHTML = '';
+      const nameDiv = document.createElement('div');
+      nameDiv.className = 'bubble ai';
+      nameDiv.innerHTML = `Hi! 💗<br>What's your name?`;
+      chatArea.appendChild(nameDiv);
+      const nameForm = document.createElement('form');
+      nameForm.className = 'input-row';
+      nameForm.innerHTML = `<input type="text" id="nameInput" placeholder="Enter your name..." required style="flex:1;"/><button type="submit">➤</button>`;
+      chatArea.appendChild(nameForm);
+      nameForm.onsubmit = function(e) {
+        e.preventDefault();
+        userName = document.getElementById('nameInput').value.trim();
+        if (userName) {
+          sessionStorage.setItem('emoheal_name', userName);
+          nameForm.remove();
+          askMood();
+        }
+      };
+    }
+
+    function askMood() {
+      chatArea.innerHTML = '';
+      const moodDiv = document.createElement('div');
+      moodDiv.className = 'bubble ai';
+      moodDiv.innerHTML = `Nice to meet you, <b>${userName}</b>!<br>How are you feeling today?`;
+      chatArea.appendChild(moodDiv);
+      const moods = [
+        {emoji:'😊', label:'Happy'},
+        {emoji:'😐', label:'Okay'},
+        {emoji:'😔', label:'Sad'},
+        {emoji:'😰', label:'Anxious'},
+        {emoji:'💪', label:'Strong'},
+        {emoji:'💬', label:'Want to talk'}
+      ];
+      const moodRow = document.createElement('div');
+      moodRow.style.display = 'flex';
+      moodRow.style.gap = '10px';
+      moodRow.style.margin = '16px 0';
+      moods.forEach(m => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.textContent = m.emoji + ' ' + m.label;
+        btn.style.fontSize = '1.1rem';
+        btn.style.padding = '8px 14px';
+        btn.style.borderRadius = '16px';
+        btn.style.border = 'none';
+        btn.style.background = '#fbc2eb';
+        btn.style.color = '#680747';
+        btn.style.cursor = 'pointer';
+        btn.onmouseover = () => btn.style.background = '#f70776', btn.style.color = '#fff';
+        btn.onmouseout = () => btn.style.background = '#fbc2eb', btn.style.color = '#680747';
+        btn.onclick = function() {
+          userMood = m.emoji + ' ' + m.label;
+          sessionStorage.setItem('emoheal_mood', userMood);
+          moodRow.remove();
+          moodDiv.innerHTML += `<br>Thank you for sharing, <b>${userName}</b>!`;
+          setTimeout(startChat, 900);
+        };
+        moodRow.appendChild(btn);
+      });
+      chatArea.appendChild(moodRow);
+    }
+
+    function startChat() {
+      // Show personalized greeting
+      personalGreeting.style.display = 'block';
+      personalGreeting.innerHTML = `Hello, <b>${userName}</b>! Your mood: <span>${userMood}</span>`;
+      chatForm.style.display = 'flex';
+      chatArea.innerHTML = '';
+      addBubble(`Hi ${userName}! I'm here to support you like a friend—whether you want to talk, need encouragement, or just want to relax together.<br>How can I help you today?`, true);
+    }
+
+    // On load, check if we have name and mood
+    if (!userName) {
+      chatForm.style.display = 'none';
+      askName();
+    } else if (!userMood) {
+      chatForm.style.display = 'none';
+      askMood();
+    } else {
+      startChat();
+    }
+  </script>
+</body>
+</html> 

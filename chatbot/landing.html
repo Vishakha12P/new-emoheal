@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to EmoHeal</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: #f8e1ec;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            background: #fff;
+            padding: 2rem 3rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        h1 {
+            color: #d81b60;
+            margin-bottom: 1.5rem;
+        }
+        .btn {
+            display: inline-block;
+            margin: 1rem;
+            padding: 0.75rem 2rem;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 8px;
+            background: #d81b60;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn:hover {
+            background: #ad1457;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to EmoHeal</h1>
+        <p>Are you a new user or do you want to login?</p>
+        <button class="btn" onclick="window.location.href='register.html'">Register</button>
+        <button class="btn" onclick="window.location.href='login.html'">Login</button>
+    </div>
+</body>
+</html> 
